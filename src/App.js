@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import React, { useState } from 'react';
+
+
+
+export default function App() {
+ let [displayedNumber, setDisplayedNumber] = useState(1993324343);
+ 
+ function deleteDigit() {
+  //transform number to array 
+  let  displayedNumberArray = Array.from(String(displayedNumber), Number);
+  // remove the last digit from the array
+  displayedNumberArray.pop();
+   // join the array elements to create a new number
+  const newDisplayedNumber = parseInt( displayedNumberArray.join(''));
+  console.log(displayedNumberArray);
+    // Update the displayed number
+  setDisplayedNumber(() =>  displayedNumberArray.length === 0? displayedNumber = 0 : newDisplayedNumber);
+  
+ }
+console.log(displayedNumber);
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <h1>{displayedNumber}</h1>
+     <button onClick={deleteDigit}>DEL</button>
     </div>
   );
 }
 
-export default App;
+
