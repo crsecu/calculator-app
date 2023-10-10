@@ -2,17 +2,94 @@ import React, {useState} from 'react';
 import Keypad from './Keypad';
 
 export default function Display() {
-    let [displayedNumber, setDisplayedNumber] = useState(1993324343);
+    let [displayedNumber, setDisplayedNumber] = useState([]);
+    const [screen, setScreen] = useState({
+        firstValue: '',
+        operator: '',
+        secondValue: '',
+        equal: false
+    })
+
+    console.log(screen);
+
+
+    function symbolDataType(symbol) {
+        //check if value button is between 0 and 9
+        const regex = /^[0-9.]$/;
+        return regex.test(symbol);
+    }
+
+    function updateParentState(newState) {
+        const numbers = /^[0-9]$/;
+        const operators = /^[+\-*/]$/;
+
+        if(numbers.test(newState) && screen.operator === '') {
+            setScreen((prevState) => {
+                return {
+                    ...prevState,
+                    firstValue: prevState.firstValue + newState
+                }
+            })
+        }
+       
+        if(operators.test(newState)){
+            setScreen((prevState) => {
+                return {
+                    ...prevState,
+                    operator: newState
+                }
+            });
+        }
+
+        if(numbers.test(newState) && screen.operator !== '') {
+            setScreen((prevState) => {
+                return {
+                    ...prevState,
+                    secondValue: prevState.secondValue + newState
+                }
+            })
+        }
+
+        if(screen.operator === '=') {
+            console.log('clicked');
+            setScreen((prevState) => {
+                return {
+                    ...prevState,
+                    equal: !prevState.equal 
+                }
+            })
+        }
+
+    }
+
+
+    function performCalculation(num1, operator, num2) {
+        
+        switch(operator) {
+            case '+' :
+                return num1 + num2;
+            case '-':
+                return num1 - num2;
+            case '*':
+                return num1 * num2;
+            case '/':
+                return num1 / num2;
+            default:
+                return 'operator not recognized'
+        }
+    }
+
+
+    function updateState(newState) {
+        if ((symbolDataType(newState) === true)) {
+            setDisplayedNumber((prevValue) => [...prevValue, newState]);
+        } 
+    }
 
     function deleteDigit() {
-        //transform number to array 
-        let  displayedNumberArray = Array.from(String(displayedNumber), Number);
         // remove the last digit from the array
-        displayedNumberArray.pop();
-         // join the array elements to create a new number
-        const newDisplayedNumber = parseInt( displayedNumberArray.join(''));
-          // Update the displayed number
-        setDisplayedNumber(() =>  displayedNumberArray.length === 0? displayedNumber = 0 : newDisplayedNumber);
+        const newArray = displayedNumber.slice(0, -1);
+        setDisplayedNumber(() =>  displayedNumber.length === 0? displayedNumber = 0 : newArray);
         
        }
 
@@ -49,7 +126,9 @@ export default function Display() {
         <Keypad 
         displayedNumber = {displayedNumber}
         deleteDigit = {deleteDigit}
-        
+        updateParentState = {updateParentState} 
+        calculate = {performCalculation}
+        objectScreen = {screen}
         />
         <br></br><br></br>
     </div>
