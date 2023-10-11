@@ -7,12 +7,12 @@ export default function Display() {
         firstValue: '',
         operator: '',
         secondValue: '',
-        equal: false
+        equal: false,
+        firstOperation: true,
+        result: 0
     })
 
-    console.log(screen);
-
-
+    console.log('is the prop passed', screen);
     function symbolDataType(symbol) {
         //check if value button is between 0 and 9
         const regex = /^[0-9.]$/;
@@ -20,8 +20,9 @@ export default function Display() {
     }
 
     function updateParentState(newState) {
-        const numbers = /^[0-9]$/;
+        const numbers = /^[0-9.]$/;
         const operators = /^[+\-*/]$/;
+        
 
         if(numbers.test(newState) && screen.operator === '') {
             setScreen((prevState) => {
@@ -50,8 +51,7 @@ export default function Display() {
             })
         }
 
-        if(screen.operator === '=') {
-            console.log('clicked');
+        if(newState === '=') {
             setScreen((prevState) => {
                 return {
                     ...prevState,
@@ -62,24 +62,63 @@ export default function Display() {
 
     }
 
+    
+
 
     function performCalculation(num1, operator, num2) {
         
+        const n1 = parseFloat(num1);
+        const n2 = parseFloat(num2);
         switch(operator) {
             case '+' :
-                return num1 + num2;
+                return n1 + n2;
             case '-':
-                return num1 - num2;
+                return n1 - n2;
             case '*':
-                return num1 * num2;
+                return n1 * n2;
             case '/':
-                return num1 / num2;
+                return n1 / n2;
             default:
                 return 'operator not recognized'
         }
+    };
+
+
+    function equal() {
+        let result = 0;
+    
+        if (screen.secondValue !== '' && screen.equal === true && screen.firstOperation === true) {
+            result = performCalculation(screen.firstValue, screen.operator, screen.secondValue);
+            setScreen((prevState) => {
+                return {
+                    firstValue: result,
+                    operator: '',
+                    secondValue: '',
+                    equal: false,
+                    result: result,
+                    firstOperation: false,
+                     
+                }
+            })
+        } 
+        else if (screen.secondValue !=='' & screen.firstOperation === false ){
+            result = performCalculation(screen.firstValue, screen.operator, screen.secondValue);
+            setScreen((prevState) => {
+                return {
+                    firstValue: result,
+                    operator: '',
+                    secondValue: '',
+                    equal: false,
+                    result: result,
+                    firstOperation: false
+                }
+            })
+        }
+        return result;
     }
-
-
+    
+    const calculationResult = equal();
+   
     function updateState(newState) {
         if ((symbolDataType(newState) === true)) {
             setDisplayedNumber((prevValue) => [...prevValue, newState]);
@@ -93,33 +132,6 @@ export default function Display() {
         
        }
 
-
-       function operation(num1, num2, operator) {
-            if(operator === 'add') {
-                return num1 + num2;
-            } else if(operator === 'substract') {
-                return num1 - num2;
-            }else if(operator === 'multiply') {
-                return num1 * num2;
-            }
-
-            switch(operator) {
-                case 'add' :
-                    return num1 + num2;
-                case 'substract':
-                    return num1 - num2;
-                case 'multiply':
-                    return num1 * num2;
-                case 'divide':
-                    return num1 / num2;
-                default:
-                    return 'operator not recognized'
-            }
-
-       }
-
-       console.log('result is', operation(5, 2, 'divide'));
-
     return (
      <div className="App">
         <h1>{displayedNumber}</h1>
@@ -130,6 +142,9 @@ export default function Display() {
         calculate = {performCalculation}
         objectScreen = {screen}
         />
+        <div>
+            <h2>{screen.result}</h2>
+        </div>
         <br></br><br></br>
     </div>
     )
