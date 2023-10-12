@@ -1,7 +1,7 @@
 import react from 'react';
 import Button from './Button';
 
-export default function Keypad({displayedNumber, deleteDigit, operation, updateParentState, performCalculation, objectScreen}) {
+export default function Keypad({screen, gatherDigits, updateData}) {
     
    //Generate buttons
    const buttonSymbols = 
@@ -11,9 +11,9 @@ export default function Keypad({displayedNumber, deleteDigit, operation, updateP
            return (
              <Button
               symbol = {button}
-              updateParentState = {updateParentState}
-              calculate = {performCalculation}
-              objectScreen = {objectScreen}
+              screen = {screen}
+              gatherDigits = {gatherDigits}
+              updateData = {updateData}
              />
            )    
        });
@@ -22,7 +22,7 @@ export default function Keypad({displayedNumber, deleteDigit, operation, updateP
      return (
        <div>
         <div>
-        <button onClick={deleteDigit}>DEL</button>
+        <button>DEL</button>
         <br></br><br></br>
        </div>
 

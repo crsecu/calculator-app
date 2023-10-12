@@ -1,10 +1,9 @@
 import React from "react";
 
-export default function Button({symbol, updateParentState, calculate, objectScreen}) {
+export default function Button({symbol, screen, gatherDigits, updateData}) {
   
   return (
-    <button type="button" value={symbol} onClick = {(e) => updateParentState(e.target.value)}
-    >
+    <button type="button" value={symbol} onClick = {(e) => updateData(symbol)}>
       {symbol}
     </button>
   );

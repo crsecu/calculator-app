@@ -2,145 +2,103 @@ import React, {useState} from 'react';
 import Keypad from './Keypad';
 
 export default function Display() {
-    let [displayedNumber, setDisplayedNumber] = useState([]);
+   
     const [screen, setScreen] = useState({
-        firstValue: '',
+        firstValue: [],
         operator: '',
-        secondValue: '',
-        equal: false,
-        firstOperation: true,
-        result: 0
+        secondValue: [],
+        getResult: false,
     })
 
-    console.log('is the prop passed', screen);
-    function symbolDataType(symbol) {
-        //check if value button is between 0 and 9
-        const regex = /^[0-9.]$/;
-        return regex.test(symbol);
+
+    function checkDigit(digitRegex, digit) {
+        return digitRegex.test(digit);
     }
 
-    function updateParentState(newState) {
-        const numbers = /^[0-9.]$/;
-        const operators = /^[+\-*/]$/;
+    function updateData(newData) {
+        const numberCheck = /[0-9]/;
+        const operators = /[+\-*/]/;
+        let number = 0;
+        let operator = '';
+        let secondValue = 0;
+        let equal = false;
+        let dot = false;
         
-
-        if(numbers.test(newState) && screen.operator === '') {
-            setScreen((prevState) => {
-                return {
-                    ...prevState,
-                    firstValue: prevState.firstValue + newState
-                }
-            })
-        }
-       
-        if(operators.test(newState)){
-            setScreen((prevState) => {
-                return {
-                    ...prevState,
-                    operator: newState
-                }
-            });
-        }
-
-        if(numbers.test(newState) && screen.operator !== '') {
-            setScreen((prevState) => {
-                return {
-                    ...prevState,
-                    secondValue: prevState.secondValue + newState
-                }
-            })
-        }
-
-        if(newState === '=') {
-            setScreen((prevState) => {
-                return {
-                    ...prevState,
-                    equal: !prevState.equal 
-                }
-            })
+        if(checkDigit(numberCheck, newData)){
+            number = newData;
+            // if no operator is set, update firstValue
+            if(screen.operator === '') {
+                setScreen(prevValue => ({
+                    ...prevValue,
+                    firstValue: [...prevValue.firstValue, newData]
+                }))
+            } else {
+                // if operator is set, update secondValue
+                setScreen(prevValue => ({
+                    ...prevValue,
+                    secondValue: [...prevValue.secondValue, newData]
+                }))
+            }
+        } else if (checkDigit(operators, newData)) {
+            operator = newData;
+            setScreen(prevValue => ({
+                ...prevValue,
+                operator: newData
+            }))
+        } else if (newData === "=") {
+            const result = calculate(screen.firstValue, screen.secondValue)
+            console.log('checking the result', result);
+            setScreen(prevValue => ({
+                ...prevValue,
+                firstValue: [result],
+                secondValue: [],
+                getResult: result
+            }))
+        } else {
+            dot = true;
         }
 
+
+        
     }
+     
 
-    
+    const calculate = (a, b) => {
+        const num1 = parseInt(a.join(''), 10);
+        const num2 = parseInt(b.join(''), 10);
+        let result;
 
-
-    function performCalculation(num1, operator, num2) {
-        
-        const n1 = parseFloat(num1);
-        const n2 = parseFloat(num2);
-        switch(operator) {
-            case '+' :
-                return n1 + n2;
+        switch (screen.operator) {
+            case '+':
+              result = num1 + num2;
+              break;
             case '-':
-                return n1 - n2;
+              result = num1 - num2;
+              break;
             case '*':
-                return n1 * n2;
+              result= num1 * num2;
+              break;
             case '/':
-                return n1 / n2;
+              result = num1 / num2;
+              break;
             default:
-                return 'operator not recognized'
-        }
-    };
+              // Handle the case where the operator is not recognized
+              console.log('Invalid operator');
+              break;
+          }
 
+          return result;
 
-    function equal() {
-        let result = 0;
-    
-        if (screen.secondValue !== '' && screen.equal === true && screen.firstOperation === true) {
-            result = performCalculation(screen.firstValue, screen.operator, screen.secondValue);
-            setScreen((prevState) => {
-                return {
-                    firstValue: result,
-                    operator: '',
-                    secondValue: '',
-                    equal: false,
-                    result: result,
-                    firstOperation: false,
-                     
-                }
-            })
-        } 
-        else if (screen.secondValue !=='' & screen.firstOperation === false ){
-            result = performCalculation(screen.firstValue, screen.operator, screen.secondValue);
-            setScreen((prevState) => {
-                return {
-                    firstValue: result,
-                    operator: '',
-                    secondValue: '',
-                    equal: false,
-                    result: result,
-                    firstOperation: false
-                }
-            })
-        }
-        return result;
-    }
-    
-    const calculationResult = equal();
-   
-    function updateState(newState) {
-        if ((symbolDataType(newState) === true)) {
-            setDisplayedNumber((prevValue) => [...prevValue, newState]);
-        } 
     }
 
-    function deleteDigit() {
-        // remove the last digit from the array
-        const newArray = displayedNumber.slice(0, -1);
-        setDisplayedNumber(() =>  displayedNumber.length === 0? displayedNumber = 0 : newArray);
-        
-       }
 
+    //console.log('check', calculate());
+    console.log('is the prop passed', screen);
     return (
      <div className="App">
-        <h1>{displayedNumber}</h1>
         <Keypad 
-        displayedNumber = {displayedNumber}
-        deleteDigit = {deleteDigit}
-        updateParentState = {updateParentState} 
-        calculate = {performCalculation}
-        objectScreen = {screen}
+        screen = {screen}
+        updateData = {updateData}
         />
         <div>
             <h2>{screen.result}</h2>
