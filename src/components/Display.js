@@ -39,7 +39,7 @@ export default function Display() {
                     secondValue: [...prevValue.secondValue, newData]
                 }))
             }
-        } else if (checkDigit(operators, newData)) {
+        } else if (checkDigit(operators, newData) && screen.secondValue.length < 1) {
             operator = newData;
             setScreen(prevValue => ({
                 ...prevValue,
@@ -49,12 +49,22 @@ export default function Display() {
             const result = calculate(screen.firstValue, screen.secondValue)
             console.log('checking the result', result);
             setScreen(prevValue => ({
-                ...prevValue,
                 firstValue: [result],
+                operator: '',
                 secondValue: [],
                 getResult: result
             }))
+        }else if(checkDigit(operators, newData) && screen.secondValue.length > 0){
+            console.log('SUPREME TEST');
+            const result2 = calculate(screen.firstValue, screen.secondValue);
+            setScreen(prevValue => ({
+                firstValue: [result2],
+                operator: newData,
+                secondValue: [],
+                getResult: result2
+            }))
         } else {
+            console.log('ELSE');
             dot = true;
         }
 
@@ -67,7 +77,7 @@ export default function Display() {
         const num1 = parseInt(a.join(''), 10);
         const num2 = parseInt(b.join(''), 10);
         let result;
-
+        
         switch (screen.operator) {
             case '+':
               result = num1 + num2;
@@ -101,7 +111,7 @@ export default function Display() {
         updateData = {updateData}
         />
         <div>
-            <h2>{screen.result}</h2>
+            <h2>{screen.getResult}</h2>
         </div>
         <br></br><br></br>
     </div>
