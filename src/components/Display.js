@@ -8,6 +8,7 @@ export default function Display() {
         operator: '',
         secondValue: [],
         getResult: false,
+        show:[]
     })
 
 
@@ -15,7 +16,7 @@ export default function Display() {
         return digitRegex.test(digit);
     }
 
-    function updateData(newData) {
+    const updateData = (newData) => {
         const numberCheck = /[0-9]/;
         const operators = /[+\-*/]/;
         let number = 0;
@@ -23,19 +24,25 @@ export default function Display() {
         let secondValue = 0;
         let equal = false;
         let dot = false;
-        
+
+       
+
+        let toDisplay = newData;
+        //console.log('WHAT IS HERE', toDisplay);
         if(checkDigit(numberCheck, newData)){
             number = newData;
             // if no operator is set, update firstValue
             if(screen.operator === '') {
                 setScreen(prevValue => ({
                     ...prevValue,
+                    show: [newData],
                     firstValue: [...prevValue.firstValue, newData]
                 }))
             } else {
                 // if operator is set, update secondValue
                 setScreen(prevValue => ({
                     ...prevValue,
+                    show: [newData],
                     secondValue: [...prevValue.secondValue, newData]
                 }))
             }
@@ -43,6 +50,7 @@ export default function Display() {
             operator = newData;
             setScreen(prevValue => ({
                 ...prevValue,
+                show: [newData],
                 operator: newData
             }))
         } else if (newData === "=") {
@@ -52,6 +60,7 @@ export default function Display() {
                 firstValue: [result],
                 operator: '',
                 secondValue: [],
+                show: [newData],
                 getResult: result
             }))
         }else if(checkDigit(operators, newData) && screen.secondValue.length > 0){
@@ -60,6 +69,7 @@ export default function Display() {
             setScreen(prevValue => ({
                 firstValue: [result2],
                 operator: newData,
+                show: [newData],
                 secondValue: [],
                 getResult: result2
             }))
@@ -68,10 +78,12 @@ export default function Display() {
             dot = true;
         }
 
+       
 
-        
-    }
+        return toDisplay;
+    };
      
+   
 
     const calculate = (a, b) => {
         const num1 = parseInt(a.join(''), 10);
@@ -101,6 +113,8 @@ export default function Display() {
 
     }
 
+    
+
 
     //console.log('check', calculate());
     console.log('is the prop passed', screen);
@@ -110,8 +124,11 @@ export default function Display() {
         screen = {screen}
         updateData = {updateData}
         />
+        <div>       
+            <h5>Check here {screen.show}</h5>
+        </div>
         <div>
-            <h2>{screen.getResult}</h2>
+           
         </div>
         <br></br><br></br>
     </div>
