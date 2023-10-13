@@ -17,7 +17,7 @@ export default function Display() {
     }
 
     const updateData = (newData) => {
-        const numberCheck = /[0-9]/;
+        const numberCheck = /[0-9.]/;
         const operators = /[+\-*/]/;
         let number = 0;
         let operator = '';
@@ -35,32 +35,32 @@ export default function Display() {
             if(screen.operator === '') {
                 setScreen(prevValue => ({
                     ...prevValue,
-                    show: [newData],
+                    show: [...prevValue.show, newData],
                     firstValue: [...prevValue.firstValue, newData]
                 }))
             } else {
                 // if operator is set, update secondValue
                 setScreen(prevValue => ({
                     ...prevValue,
-                    show: [newData],
+                    show: [...prevValue.show, newData],
                     secondValue: [...prevValue.secondValue, newData]
                 }))
             }
-        } else if (checkDigit(operators, newData) && screen.secondValue.length < 1) {
+        } else if (checkDigit(operators, newData) && screen.firstValue.length > 0 && screen.secondValue.length < 1) {
             operator = newData;
             setScreen(prevValue => ({
                 ...prevValue,
-                show: [newData],
+                show: [...prevValue.show, newData],
                 operator: newData
             }))
-        } else if (newData === "=") {
+        } else if (newData === "=" && screen.firstValue.length > 0 && screen.secondValue.length > 0) {
             const result = calculate(screen.firstValue, screen.secondValue)
             console.log('checking the result', result);
             setScreen(prevValue => ({
                 firstValue: [result],
                 operator: '',
                 secondValue: [],
-                show: [newData],
+                show: [result],
                 getResult: result
             }))
         }else if(checkDigit(operators, newData) && screen.secondValue.length > 0){
@@ -69,10 +69,12 @@ export default function Display() {
             setScreen(prevValue => ({
                 firstValue: [result2],
                 operator: newData,
-                show: [newData],
+                show: [result2],
                 secondValue: [],
                 getResult: result2
             }))
+        }else if(newData === 'RESET') {
+           reset();
         } else {
             console.log('ELSE');
             dot = true;
@@ -118,11 +120,24 @@ export default function Display() {
 
     //console.log('check', calculate());
     console.log('is the prop passed', screen);
+
+
+    function reset() {
+        setScreen({firstValue: [],
+            operator: '',
+            secondValue: [],
+            getResult: false,
+            show:[]})
+    };
+
+    
+
     return (
      <div className="App">
         <Keypad 
         screen = {screen}
         updateData = {updateData}
+        reset = {reset}
         />
         <div>       
             <h5>Check here {screen.show}</h5>

@@ -1,7 +1,7 @@
 import react from 'react';
 import Button from './Button';
 
-export default function Keypad({screen, gatherDigits, updateData}) {
+export default function Keypad({screen, gatherDigits, updateData, reset}) {
     
    //Generate buttons
    const buttonSymbols = 
