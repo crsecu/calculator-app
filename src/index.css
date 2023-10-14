@@ -1,3 +1,12 @@
+:root {
+  /* Theme 1 */
+
+  /* Theme 2 */
+
+  /* Theme 3 */
+
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -16,9 +25,12 @@ code {
 button {
   margin-left: 5px;
   font-size: 2rem;
+  border-radius: 8px;
+  border: none;
 }
 
 .calculator {
+  padding: 0 25px;
   flex-direction: column;
   display: flex;
   align-items: center;
@@ -29,5 +41,24 @@ button {
 .calculator__keypad-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  width: 35%;
+  gap: 10px;
+  max-width: 300px;
+  padding: 16px;
+  border-radius: 6px;
+  background-color: navy;
 }
+
+.calc__RESET-btn {
+  grid-column: span 2;
+}
+
+.calc__equal-btn {
+  grid-column: span 2;
+}
+
+@media (min-width: 768px) {
+  .calculator__keypad-wrapper {
+    width: 35%;
+  }
+}
+  
