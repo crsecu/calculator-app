@@ -17,3 +17,17 @@ button {
   margin-left: 5px;
   font-size: 2rem;
 }
+
+.calculator {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+.calculator__screen {
+  height: 100px;
+}
+.calculator__keypad-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  width: 35%;
+}

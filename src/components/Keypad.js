@@ -5,7 +5,7 @@ export default function Keypad({screen, gatherDigits, updateData, reset}) {
     
    //Generate buttons
    const buttonSymbols = 
-       [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'DEL', 'RESET', '=', '+', '-', '*', '/', '.'];
+       [7, 8, 9, 'DEL', 4, 5, 6, '+', 1, 2, 3, '-', '.', 0, '/', '*', 'RESET', '=' ];
    
        const displayButtons = buttonSymbols.map((button) => {
            return (
@@ -20,14 +20,9 @@ export default function Keypad({screen, gatherDigits, updateData, reset}) {
    
    
      return (
-       <div>
-        <div>
-        <br></br><br></br>
-       </div>
-
-       {displayButtons}
-       </div>
-       
+        <div className = "calculator__keypad-wrapper">
+        {displayButtons}
+        </div>
      );
    }
    

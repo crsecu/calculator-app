@@ -7,9 +7,7 @@ import Keypad from './components/Keypad';
 export default function App() {
  
   return (
-    <div>
       <Display />
-    </div>
     
   );
 }

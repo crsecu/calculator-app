@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import Keypad from './Keypad';
+import Screen from './Screen';
+import Title from './Title';
 
 export default function Display() {
    
@@ -146,15 +148,14 @@ export default function Display() {
     
 
     return (
-     <div className="App">
+     <div className="calculator">
+        <Title/>
+        <Screen displayScreen = {screen.show}/>
         <Keypad 
         screen = {screen}
         updateData = {updateData}
         reset = {reset}
         />
-        <div>       
-            <h5>Check here {screen.show}</h5>
-        </div>
         <div>
            
         </div>
