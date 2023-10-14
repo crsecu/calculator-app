@@ -19,18 +19,10 @@ export default function Display() {
     const updateData = (newData) => {
         const numberCheck = /[0-9.]/;
         const operators = /[+\-*/]/;
-        let number = 0;
-        let operator = '';
-        let secondValue = 0;
-        let equal = false;
-        let dot = false;
-
-       
 
         let toDisplay = newData;
-        //console.log('WHAT IS HERE', toDisplay);
+   
         if(checkDigit(numberCheck, newData)){
-            number = newData;
             // if no operator is set, update firstValue
             if(screen.operator === '') {
                 setScreen(prevValue => ({
@@ -47,7 +39,6 @@ export default function Display() {
                 }))
             }
         } else if (checkDigit(operators, newData) && screen.firstValue.length > 0 && screen.secondValue.length < 1) {
-            operator = newData;
             setScreen(prevValue => ({
                 ...prevValue,
                 show: [...prevValue.show, newData],
@@ -64,20 +55,21 @@ export default function Display() {
                 getResult: result
             }))
         }else if(checkDigit(operators, newData) && screen.secondValue.length > 0){
-            console.log('SUPREME TEST');
-            const result2 = calculate(screen.firstValue, screen.secondValue);
+            const result = calculate(screen.firstValue, screen.secondValue);
             setScreen(prevValue => ({
-                firstValue: [result2],
+                firstValue: [result],
                 operator: newData,
-                show: [result2],
+                show: [result, newData],
                 secondValue: [],
-                getResult: result2
+                getResult: result
             }))
         }else if(newData === 'RESET') {
            reset();
-        } else {
+        }else if(newData === 'DEL') {
+            console.log('DEEEEEL');
+            delBtn();
+        }else {
             console.log('ELSE');
-            dot = true;
         }
 
        
@@ -115,20 +107,41 @@ export default function Display() {
 
     }
 
-    
-
-
-    //console.log('check', calculate());
     console.log('is the prop passed', screen);
-
 
     function reset() {
         setScreen({firstValue: [],
             operator: '',
             secondValue: [],
             getResult: false,
-            show:[]})
+            show:[]
+        })
     };
+
+    function delBtn() {
+        setScreen((prevValue) => {
+            let updatedScreen = { ...prevValue };
+    
+            if (updatedScreen.secondValue.length > 0) {
+                // If there are digits in the secondValue array, remove the last digit.
+                updatedScreen.secondValue.pop();
+            } else if (updatedScreen.operator !== '' && updatedScreen.firstValue.length > 0) {
+                // If an operator is set and there are digits in the firstValue array, remove the operator.
+                updatedScreen.operator = '';
+            } else if (updatedScreen.firstValue.length > 0) {
+                // If no operator is set and there are digits in the firstValue array, remove the last digit.
+                updatedScreen.firstValue.pop();
+            }
+    
+            // Update the show array to match the updated state.
+            if (updatedScreen.show.length > 0) {
+                updatedScreen.show = updatedScreen.show.slice(0, -1);
+            }
+    
+            return updatedScreen;
+        });
+    }
+    
 
     
 

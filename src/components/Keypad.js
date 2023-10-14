@@ -22,7 +22,6 @@ export default function Keypad({screen, gatherDigits, updateData, reset}) {
      return (
        <div>
         <div>
-        <button>DEL</button>
         <br></br><br></br>
        </div>
 
