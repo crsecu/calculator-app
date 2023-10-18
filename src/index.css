@@ -76,6 +76,13 @@ button {
 
 .calculator__title-wrapper {
   padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.calculator__toggle-theme {
+  display: flex;
+  justify-content: space-between;
 }
 
 .calculator__title-wrapper h1{
