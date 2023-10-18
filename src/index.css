@@ -46,11 +46,13 @@
 
 }
 
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
   font-family: 'League Spartan', sans-serif;
-  box-sizing: border-box;
   font-size: 0.75rem;
 }
 
@@ -60,37 +62,61 @@ button {
   border-radius: 8px;
   border: none;
   font-family: inherit;
+  height: 60px;
+}
+
+.btn {
+  font-size: 1.5rem;
 }
 
 .calculator {
-  padding: 0 25px;
-  flex-direction: column;
-  display: flex;
+  padding: 35px 25px;
   align-items: center;
 }
+
+.calculator__title-wrapper {
+  padding-bottom: 20px;
+}
+
+.calculator__title-wrapper h1{
+  font-size : 2.375rem;
+}
 .calculator__screen {
-  height: 100px;
+  background-color: red;
+  height: 90px;
+  width: 100%;
+  padding: 16px;
+  margin-bottom: 24px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.calculator__result {
+  font-size: 2rem;
 }
 .calculator__keypad-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 10px;
-  max-width: 300px;
-  padding: 16px;
-  border-radius: 6px;
+  width: 100%;
+  padding: 26px 16px;
+  border-radius: 10px;
   background-color: navy;
 }
 
-.calc__RESET-btn {
+.calculator__RESET-btn {
   grid-column: span 2;
 }
 
-.calc__equal-btn {
+.calculator__equal-btn {
   grid-column: span 2;
 }
 
 @media (min-width: 768px) {
-  .calculator__keypad-wrapper {
+  .calculator__keypad-wrapper,
+  .calculator__screen {
     width: 35%;
   }
 }

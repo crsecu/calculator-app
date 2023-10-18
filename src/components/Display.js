@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Keypad from './Keypad';
 import Screen from './Screen';
+import Title from './Title';
 
 export default function Display() {
    
@@ -147,7 +148,8 @@ export default function Display() {
     
 
     return (
-     <div className="calculator"> 
+     <div className="calculator">
+        <Title/>
         <Screen displayScreen = {screen.show}/>
         <Keypad 
         screen = {screen}

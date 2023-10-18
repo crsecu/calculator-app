@@ -5,14 +5,14 @@ export default function Button({symbol, screen, gatherDigits, updateData}) {
   switch(symbol) {
     case 'DEL':
     case 'RESET':
-      return `calc__${symbol}-btn`;
+      return `btn calculator__${symbol}-btn`;
     case '=' :
-      return `btn calc__equal-btn`   ;
+      return `btn calculator__equal-btn`   ;
       default:
         if (typeof symbol === 'number') {
-          return `btn calc__btn-${symbol}`;
+          return `calculator__btn-${symbol}`;
         } else {
-          return `calc__btn${symbol}`;
+          return `calculator__btn${symbol}`;
         }
    }
   }
