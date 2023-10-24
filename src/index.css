@@ -3,7 +3,6 @@
   --t1-mainBackround: hsl(222, 26%, 31%);
   --t1-keypadBackground: hsl(223, 31%, 20%);
   --t1-screenBackground: hsl(224, 36%, 15%);
-
   --t1-keyBackground: hsl(225, 21%, 49%);
   --t1-keyActive: hsl(225, 41%, 74%);
   --t1-keyShadow: hsl(224, 28%, 35%);
@@ -21,7 +20,6 @@
   --t2-mainBackround: hsl(0, 0%, 90%);
   --t2-keypadBackground: hsl(0, 5%, 81%);
   --t2-screenBackground: hsl(0, 0%, 93%);
-
   --t2-keyBackgroundTeal: hsl(185, 42%, 37%);
   --t2-keyBackgroundActive: hsl(181, 74%, 73%);
   --t2-keyShadowTeal: hsl(185, 58%, 25%);
@@ -36,16 +34,14 @@
   /* Theme 3 */
   --t3-mainBackround: hsl(268, 75%, 9%);
   --t3-keypadBackground: hsl(268, 71%, 12%);
-
-  --t3-keyBackground: hsl(268, 47%, 21%);
-  --t3-keyBackground2: hsl(281, 89%, 26%);
+  --t3-btnBackground: hsl(268, 47%, 21%);
+  --t3-keyBackground: hsl(281, 89%, 26%);
   --t3-btnBackgroundActive: hsl(276, 48%, 44%);
   --t3-keyBackgroundActive: hsl(289, 48%, 44%);
   --t3-keyShadow: hsl(285, 91%, 52%);
   --t3-toggle: hsl(176, 100%, 44%);
   --t3-toggleActive: hsl(176, 60%, 76%);
   --t3-keyShadowsCyan: hsl(177, 92%, 70%);
-  --t3-keyBackground: hsl(268, 47%, 21%);
   --t3-btnShadow: hsl(290, 70%, 36%);
   /* text */
   --t3-btnText: hsl(52, 100%, 62%);
@@ -262,7 +258,7 @@ button {
 }
 
 .t3-keypadBackground {
-  background-color: var(--t3-keyBackground);
+  background-color: var(--t3-btnBackground);
 }
 
 .t3-toggleBtn {
@@ -270,7 +266,7 @@ button {
 }
 
 .t3-btnColor {
-  background-color: var(--t3-keyBackground);
+  background-color: var(--t3-btnBackground);
 }
 
 .t3-btnColor:active {
@@ -292,7 +288,7 @@ button {
 
 .t3-keyShadow {
   border-bottom: 4px solid var(--t3-keyShadow);
-  background-color: var(--t3-keyBackground2);
+  background-color: var(--t3-keyBackground);
   color: var(--btnWhiteText);
 }
 
