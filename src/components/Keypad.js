@@ -1,7 +1,7 @@
 import react from 'react';
 import Button from './Button';
 
-export default function Keypad({screen, gatherDigits, updateData, reset}) {
+export default function Keypad({screen, gatherDigits, updateData, reset, toggleTheme}) {
     
    //Generate buttons
    const buttonSymbols = 
@@ -14,13 +14,26 @@ export default function Keypad({screen, gatherDigits, updateData, reset}) {
               screen = {screen}
               gatherDigits = {gatherDigits}
               updateData = {updateData}
+              toggleTheme = {toggleTheme}
              />
            )    
        });
+
+       let keypadColor = "";
+       switch(toggleTheme) {
+        case 'two':
+        keypadColor = 't2-keypadBackground';
+        break;
+        case 'three':
+        keypadColor = 't3-screenBackground';
+        break;
+        default:
+        keypadColor = 't1-keypadBackground';
+       }
    
    
      return (
-        <div className = "calculator__keypad-wrapper">
+        <div className = {`calculator__keypad-wrapper ${keypadColor}`}>
         {displayButtons}
         </div>
      );
