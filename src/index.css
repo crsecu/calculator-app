@@ -3,17 +3,18 @@
   --t1-mainBackround: hsl(222, 26%, 31%);
   --t1-keypadBackground: hsl(223, 31%, 20%);
   --t1-screenBackground: hsl(224, 36%, 15%);
-  
 
   --t1-keyBackground: hsl(225, 21%, 49%);
+  --t1-keyActive: hsl(225, 41%, 74%);
   --t1-keyShadow: hsl(224, 28%, 35%);
-              /*  for = button and theme toggle btn */
+  /*  for = button and theme toggle btn */
   --t1-toggle: hsl(6, 63%, 50%);
-  --t1-keyShadowRed:  hsl(6, 70%, 34%);
+  --t1-keyShadowRed: hsl(6, 70%, 34%);
+  --t1-keyShadowRedActive: hsl(19, 88%, 63%);
   --t1-btnColor: hsl(30, 25%, 89%);
   --t1-btnShadow: hsl(28, 16%, 65%);
-              /* text */
-  --t1-btnText: hsl(221, 14%, 31%); 
+  /* text */
+  --t1-btnText: hsl(221, 14%, 31%);
   --btnWhiteText: hsl(0, 0%, 100%);
 
   /* Theme 2 */
@@ -22,29 +23,33 @@
   --t2-screenBackground: hsl(0, 0%, 93%);
 
   --t2-keyBackgroundTeal: hsl(185, 42%, 37%);
+  --t2-keyBackgroundActive: hsl(181, 74%, 73%);
   --t2-keyShadowTeal: hsl(185, 58%, 25%);
   --t2-toggle: hsl(25, 98%, 40%);
+  --t2-toggleActive: hsl(25, 82%, 56%);
   --t2-keyShadowOrange: hsl(25, 99%, 27%);
   --t2-keyBackground: hsl(45, 7%, 89%);
   --t2-btnShadow: hsl(35, 11%, 61%);
-               /* text */
-               --t2-btnText: hsl(60, 10%, 19%);
-               
+  /* text */
+  --t2-btnText: hsl(60, 10%, 19%);
+
   /* Theme 3 */
   --t3-mainBackround: hsl(268, 75%, 9%);
   --t3-keypadBackground: hsl(268, 71%, 12%);
 
   --t3-keyBackground: hsl(268, 47%, 21%);
   --t3-keyBackground2: hsl(281, 89%, 26%);
+  --t3-btnBackgroundActive: hsl(276, 48%, 44%);
+  --t3-keyBackgroundActive: hsl(289, 48%, 44%);
   --t3-keyShadow: hsl(285, 91%, 52%);
   --t3-toggle: hsl(176, 100%, 44%);
+  --t3-toggleActive: hsl(176, 60%, 76%);
   --t3-keyShadowsCyan: hsl(177, 92%, 70%);
   --t3-keyBackground: hsl(268, 47%, 21%);
   --t3-btnShadow: hsl(290, 70%, 36%);
-               /* text */
-               --t3-btnText: hsl(52, 100%, 62%);
-               --t3-VeryDarkBlue:  hsl(198, 20%, 13%);
-
+  /* text */
+  --t3-btnText: hsl(52, 100%, 62%);
+  --t3-VeryDarkBlue: hsl(198, 20%, 13%);
 }
 
 * {
@@ -53,7 +58,7 @@
 
 body {
   margin: 0;
-  font-family: 'League Spartan', sans-serif;
+  font-family: "League Spartan", sans-serif;
   font-size: 0.75rem;
 }
 
@@ -86,8 +91,8 @@ button {
   justify-content: space-between;
 }
 
-.calculator__title-wrapper h1{
-  font-size : 2.375rem;
+.calculator__title-wrapper h1 {
+  font-size: 2.375rem;
 }
 .calculator__screen {
   height: 90px;
@@ -131,11 +136,11 @@ button {
     width: 35%;
   }
 }
-  
+
 /* theme styling */
 
-  /* Theme 1 */
-.t1-screenBackground  {
+/* Theme 1 */
+.t1-screenBackground {
   background-color: var(--t1-screenBackground);
 }
 
@@ -155,16 +160,28 @@ button {
   background-color: var(--t1-btnColor);
 }
 
+.t1-btnColor:active {
+  background-color: var(--btnWhiteText);
+}
+
 .t1-keyShadow {
   border-bottom: 4px solid var(--t1-keyShadow);
   background-color: var(--t1-keyBackground);
   color: var(--btnWhiteText);
 }
 
+.t1-keyShadow:active {
+  background-color: var(--t1-keyActive);
+}
+
 .t1-toggleBtnShadow {
   border-bottom: 4px solid var(--t1-keyShadowRed) !important;
   background-color: var(--t1-toggle);
   color: var(--btnWhiteText);
+}
+
+.t1-toggleBtnShadow:active {
+  background-color: var(--t1-keyShadowRedActive);
 }
 
 .t1-btnShadow {
@@ -179,7 +196,6 @@ button {
 .whiteText {
   color: var(--btnWhiteText);
 }
-
 
 /* Theme 2 */
 .t2-screenBackground {
@@ -199,10 +215,18 @@ button {
   background-color: var(--t1-btnColor);
 }
 
+.t2-btnColor:active {
+  background-color: var(--btnWhiteText);
+}
+
 .t2-keyShadow {
   border-bottom: 4px solid var(--t2-keyShadowTeal);
   background-color: var(--t2-keyBackgroundTeal);
   color: var(--btnWhiteText);
+}
+
+.t2-keyShadow:active {
+  background-color: var(--t2-keyBackgroundActive);
 }
 
 .t2-toggleBtn {
@@ -212,64 +236,70 @@ button {
 .t2-toggleBtnShadow {
   border-bottom: 4px solid var(--t2-keyShadowOrange);
   background-color: var(--t2-toggle);
+  color: var(--btnWhiteText);
 }
-
-
 
 .t2-btnShadow {
   border-bottom: 4px solid var(--t2-btnShadow);
+}
+
+.t2-toggleBtnShadow:active {
+  background-color: var(--t2-toggleActive);
 }
 
 .t2-btnText {
   color: var(--t2-btnText);
 }
 
+/* Theme 3 */
+.t3-screenBackground {
+  /* keypad and screen are the same color */
+  background-color: var(--t3-keypadBackground);
+}
 
+.t3-mainBackground {
+  background-color: var(--t3-mainBackround);
+}
 
-  /* Theme 3 */
-  .t3-screenBackground  {
-    /* keypad and screen are the same color */
-    background-color: var(--t3-keypadBackground);
-  }
-  
-  .t3-mainBackground {
-    background-color: var(--t3-mainBackround);
-  }
-  
-  .t3-keypadBackground {
-    background-color: var(--t3-keyBackground);
-  }
-  
-  
-  .t3-toggleBtn {
-    background-color: var(--t3-toggle);
-  }
+.t3-keypadBackground {
+  background-color: var(--t3-keyBackground);
+}
 
-  .t3-btnColor {
-    background-color: var(--t3-keyBackground);
-  }
-  
-  .t3-toggleBtnShadow {
-    border-bottom: 4px solid var(--t3-keyShadowsCyan);
-    color: var(--t3-VeryDarkBlue) !important;
-    background-color: var(--t3-toggle);
-  }
-  
-  .t3-btnText {
-    color: var(--t3-btnText);
-  } 
+.t3-toggleBtn {
+  background-color: var(--t3-toggle);
+}
 
-  .t3-keyShadow {
-    border-bottom: 4px solid var(--t3-keyShadow);
-    background-color: var(--t3-keyBackground2);
-    color: var(--btnWhiteText);
-  }
-  
-  .t3-btnShadow {
-    border-bottom: 4px solid var(--t3-btnShadow);
-  }
-  
-  /* .t3-equalBtnText {
-    color: var(--t3-VeryDarkBlue);
-    background-color: var(--t3-toggle);
-  } */
+.t3-btnColor {
+  background-color: var(--t3-keyBackground);
+}
+
+.t3-btnColor:active {
+  background-color: var(--t3-btnBackgroundActive);
+}
+
+.t3-toggleBtnShadow {
+  border-bottom: 4px solid var(--t3-keyShadowsCyan);
+  color: var(--t3-VeryDarkBlue) !important;
+  background-color: var(--t3-toggle);
+}
+
+.t3-toggleBtnShadow:active {
+  background-color: var(--t3-toggleActive);
+}
+.t3-btnText {
+  color: var(--t3-btnText);
+}
+
+.t3-keyShadow {
+  border-bottom: 4px solid var(--t3-keyShadow);
+  background-color: var(--t3-keyBackground2);
+  color: var(--btnWhiteText);
+}
+
+.t3-keyShadow:active {
+  background-color: var(--t3-keyBackgroundActive);
+}
+
+.t3-btnShadow {
+  border-bottom: 4px solid var(--t3-btnShadow);
+}
