@@ -361,6 +361,12 @@ input {
 
 .calculator__toggle-label {
   position: absolute;
-  top: -14px;
-  left: 6px;
+  top: -16px;
+  left: 7px;
+  font-size: 0.813rem;
+}
+
+.calculator__toggle-theme-title {
+  font-size: 12px;
+  letter-spacing: 0.875px;
 }
