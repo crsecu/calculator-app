@@ -350,9 +350,21 @@ input {
   appearance: none;
   -webkit-appearance: none;
   border-radius: 90%;
-  background: red;
-  border: 1px solid red;
-  
+  /* background-color: var(--t1-toggle); */
+  /* border: 1px solid var(--t1-keyShadowRed);
+   */
+}
+
+.t1 {
+  background-color: var(--t1-toggle);
+}
+
+.t2 {
+  background-color: var(--t2-toggle);
+}
+
+.t3 {
+  background-color: var(--t3-toggle);
 }
 
 .calculator__toggle-container {
