@@ -11,21 +11,23 @@ export default function Title({updateSelectedTheme, toggleTheme}) {
   let title = "";
   let themeText = "";
   let toggleSwitch = "";
+  let toggleSwitchBackground = "";
 
   switch(toggleTheme) {
     case 'two':
     title = "t2-btnText";
     themeText = "calculator__toggle-theme2"
-    
+    toggleSwitchBackground = "calculator__toggle-theme t2-keypadBackground"
     break;
     case 'three':
     title = "t3-btnText";
     themeText = "calculator__toggle-theme3"
-    
+    toggleSwitchBackground = "calculator__toggle-theme t3-keypadBackground"
     break;
     default:
     title = "whiteText";
     themeText = "calculator__toggle-theme1";
+    toggleSwitchBackground = "calculator__toggle-theme t1-keypadBackground"
     
 
   }
@@ -37,7 +39,7 @@ export default function Title({updateSelectedTheme, toggleTheme}) {
       </div>
       <div className="calculator__toggle-theme-wrapper">
         <span className={`calculator__toggle-theme-title ${themeText}`}>THEME</span>
-        <div className = "calculator__toggle-theme">
+        <div className = {toggleSwitchBackground}>
           <div className = "calculator__toggle-container">
             <label for="one" className={`calculator__toggle-label ${themeText}`}>1</label>
             <input

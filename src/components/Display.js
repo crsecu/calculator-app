@@ -64,6 +64,7 @@ export default function Display() {
       const result = calculate(screen.firstValue, screen.secondValue);
       console.log("checking the result", result);
       setScreen((prevValue) => ({
+        ...prevValue, 
         firstValue: [result],
         operator: "",
         secondValue: [],
@@ -95,8 +96,8 @@ export default function Display() {
   };
 
   const calculate = (a, b) => {
-    const num1 = parseInt(a.join(""), 10);
-    const num2 = parseInt(b.join(""), 10);
+    const num1 = parseFloat(a.join(""), 10);
+    const num2 = parseFloat(b.join(""), 10);
     let result;
 
     switch (screen.operator) {
