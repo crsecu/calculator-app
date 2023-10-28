@@ -77,6 +77,7 @@ export default function Display() {
     ) {
       const result = calculate(screen.firstValue, screen.secondValue);
       setScreen((prevValue) => ({
+        ...prevValue,
         firstValue: [result],
         operator: newData,
         show: [result, newData],
@@ -177,7 +178,7 @@ export default function Display() {
   return (
     <div className={`calculator ${backroundColor}`}>
       <Title updateSelectedTheme={updateSelectedTheme} toggleTheme = {screen.selectedTheme}/>
-      <Screen displayScreen={screen.show} toggleTheme = {screen.selectedTheme}/>
+      <Screen displayScreen={screen.show.length > 0 ? screen.show : ["0"]} toggleTheme = {screen.selectedTheme}/>
       <Keypad screen={screen} updateData={updateData} reset={reset} toggleTheme = {screen.selectedTheme}/>
       <div></div>
       <br></br>
