@@ -34,7 +34,7 @@ export default function Button({symbol, screen, gatherDigits, updateData, toggle
 
   }
 
-  console.log('shadows, ' + btnShadowDR, btnShadowEqual, btnShadowAll);
+
 
   let createClassName = '';
   switch(symbol) {

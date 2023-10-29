@@ -51,11 +51,30 @@ export default function Display() {
       screen.firstValue.length > 0 &&
       screen.secondValue.length < 1
     ) {
-      setScreen((prevValue) => ({
-        ...prevValue,
-        show: [...prevValue.show, newData],
-        operator: newData,
-      }));
+      setScreen((prevValue) => {
+        if(prevValue.operator === "") {
+           // If no operator was previously selected, keep only the new operator
+          return {
+            ...prevValue,
+            show: [prevValue.show, newData],
+            operator: newData
+          }
+        }
+        else if (newData !== prevValue.operator) {
+            // Replace the previous operator in screen.show
+          const updatedShow = prevValue.show.slice(0, -1).concat(newData);
+          return {
+            ...prevValue,
+            show: updatedShow,
+            operator: newData,
+          };
+        } else {
+          return {
+            ...prevValue,
+            show: prevValue.show,
+          };
+        }
+      });
     } else if (
       newData === "=" &&
       screen.firstValue.length > 0 &&
@@ -64,7 +83,7 @@ export default function Display() {
       const result = calculate(screen.firstValue, screen.secondValue);
       console.log("checking the result", result);
       setScreen((prevValue) => ({
-        ...prevValue, 
+        ...prevValue,
         firstValue: [result],
         operator: "",
         secondValue: [],
@@ -87,7 +106,6 @@ export default function Display() {
     } else if (newData === "RESET") {
       reset();
     } else if (newData === "DEL") {
-      console.log("DEEEEEL");
       delBtn();
     } else {
       console.log("ELSE");
@@ -126,7 +144,7 @@ export default function Display() {
   console.log("is the prop passed", screen);
 
   function reset() {
-    setScreen(prevValue =>({
+    setScreen((prevValue) => ({
       ...prevValue,
       firstValue: [],
       operator: "",
@@ -163,23 +181,34 @@ export default function Display() {
     });
   }
 
-  let backroundColor = '';
-  switch(screen.selectedTheme) {
-    case 'two':
-    backroundColor = 't2-mainBackground';
-    break;
-    case 'three':
-    backroundColor = 't3-mainBackground';
-    break;
+  let backroundColor = "";
+  switch (screen.selectedTheme) {
+    case "two":
+      backroundColor = "t2-mainBackground";
+      break;
+    case "three":
+      backroundColor = "t3-mainBackground";
+      break;
     default:
-    backroundColor = 't1-mainBackground';
+      backroundColor = "t1-mainBackground";
   }
 
   return (
     <div className={`calculator ${backroundColor}`}>
-      <Title updateSelectedTheme={updateSelectedTheme} toggleTheme = {screen.selectedTheme}/>
-      <Screen displayScreen={screen.show.length > 0 ? screen.show : ["0"]} toggleTheme = {screen.selectedTheme}/>
-      <Keypad screen={screen} updateData={updateData} reset={reset} toggleTheme = {screen.selectedTheme}/>
+      <Title
+        updateSelectedTheme={updateSelectedTheme}
+        toggleTheme={screen.selectedTheme}
+      />
+      <Screen
+        displayScreen={screen.show.length > 0 ? screen.show : ["0"]}
+        toggleTheme={screen.selectedTheme}
+      />
+      <Keypad
+        screen={screen}
+        updateData={updateData}
+        reset={reset}
+        toggleTheme={screen.selectedTheme}
+      />
       <div></div>
       <br></br>
       <br></br>

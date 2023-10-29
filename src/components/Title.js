@@ -41,7 +41,7 @@ export default function Title({updateSelectedTheme, toggleTheme}) {
         <span className={`calculator__toggle-theme-title ${themeText}`}>THEME</span>
         <div className = {toggleSwitchBackground}>
           <div className = "calculator__toggle-container">
-            <label for="one" className={`calculator__toggle-label ${themeText}`}>1</label>
+            <label htmlFor="one" className={`calculator__toggle-label ${themeText}`}>1</label>
             <input
               className={`calculator__toggle-switch ${toggleTheme === "one" ? "visible t1" : "hidden"}`}
               type="radio"
@@ -51,7 +51,7 @@ export default function Title({updateSelectedTheme, toggleTheme}) {
             />
           </div>
           <div className = "calculator__toggle-container">
-            <label for="two" className={`calculator__toggle-label ${themeText}`}>2</label>
+            <label htmlFor="two" className={`calculator__toggle-label ${themeText}`}>2</label>
             <input
               className={`calculator__toggle-switch ${toggleTheme === "two" ? "visible t2" : "hidden"}`}
               type="radio"
@@ -62,7 +62,7 @@ export default function Title({updateSelectedTheme, toggleTheme}) {
           </div>
           
           <div className = "calculator__toggle-container">
-            <label for="three" className={`calculator__toggle-label ${themeText}`}>3</label>
+            <label htmlFor="three" className={`calculator__toggle-label ${themeText}`}>3</label>
             <input
               className={`calculator__toggle-switch ${toggleTheme === "three" ? "visible t3" : "hidden"}`}
               type="radio"

@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Screen({displayScreen, toggleTheme}) {
-console.log('theme is', toggleTheme);
+
 let screenBackgroundColor = "";
 let screenTextColor = "";
 switch (toggleTheme) {
@@ -18,7 +18,7 @@ switch (toggleTheme) {
     screenTextColor = 'whiteText';
 }
 
-console.log('screen color ', screenTextColor);
+
     return (
         <div className = {`calculator__screen ${screenBackgroundColor}`}>
             <span className = {`calculator__result ${screenTextColor}`}>{displayScreen}</span>
