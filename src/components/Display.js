@@ -26,6 +26,7 @@ export default function Display() {
 
   const updateData = (newData) => {
     const numberCheck = /[0-9.]/;
+    const decimalPoint = /\./;
     const operators = /[+\-*/]/;
 
     let toDisplay = newData;
@@ -33,12 +34,19 @@ export default function Display() {
     if (checkDigit(numberCheck, newData)) {
       // if no operator is set, update firstValue
       if (screen.operator === "") {
+        if(newData === "." && screen.firstValue.includes(".") && screen.show.includes(".")) {
+          return;
+        }
+
         setScreen((prevValue) => ({
           ...prevValue,
           show: [...prevValue.show, newData],
           firstValue: [...prevValue.firstValue, newData],
         }));
       } else {
+        if(newData === "." && screen.secondValue.includes(".")) {
+          return;
+        }
         // if operator is set, update secondValue
         setScreen((prevValue) => ({
           ...prevValue,
