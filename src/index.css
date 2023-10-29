@@ -102,7 +102,6 @@ button {
   color: var(--t3-btnText);
 }
 
-
 .calculator__toggle-theme-itle{
   display: flex;
   align-items: center;
@@ -147,10 +146,21 @@ button {
   font-size: 1.125rem;
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 1025px) {
   .calculator__keypad-wrapper,
+  .calculator__title-wrapper,
   .calculator__screen {
     width: 35%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .calculator__keypad-wrapper,
+  .calculator__title-wrapper,
+  .calculator__screen {
+     width: 25%;
   }
 }
 
