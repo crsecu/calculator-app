@@ -26,7 +26,6 @@ export default function Display() {
 
   const updateData = (newData) => {
     const numberCheck = /[0-9.]/;
-    const decimalPoint = /\./;
     const operators = /[+\-*/]/;
 
     let toDisplay = newData;
@@ -34,7 +33,22 @@ export default function Display() {
     if (checkDigit(numberCheck, newData)) {
       // if no operator is set, update firstValue
       if (screen.operator === "") {
-        if(newData === "." && screen.firstValue.includes(".") && screen.show.includes(".")) {
+        if (
+          newData === "." &&
+          screen.firstValue.includes(".") &&
+          screen.show.includes(".")
+        ) {
+          return;
+        }
+
+        const containsDot = screen.firstValue.some((item) =>
+          item.toString().includes(".")
+        );
+        if (
+          containsDot &&
+          screen.getResult !== false &&
+          screen.secondValue.length > 0
+        ) {
           return;
         }
 
@@ -44,7 +58,7 @@ export default function Display() {
           firstValue: [...prevValue.firstValue, newData],
         }));
       } else {
-        if(newData === "." && screen.secondValue.includes(".")) {
+        if (newData === "." && screen.secondValue.includes(".")) {
           return;
         }
         // if operator is set, update secondValue
@@ -60,16 +74,15 @@ export default function Display() {
       screen.secondValue.length < 1
     ) {
       setScreen((prevValue) => {
-        if(prevValue.operator === "") {
-           // If no operator was previously selected, keep only the new operator
+        if (prevValue.operator === "") {
+          // If no operator was previously selected, keep only the new operator
           return {
             ...prevValue,
             show: [prevValue.show, newData],
-            operator: newData
-          }
-        }
-        else if (newData !== prevValue.operator) {
-            // Replace the previous operator in screen.show
+            operator: newData,
+          };
+        } else if (newData !== prevValue.operator) {
+          // Replace the previous operator in screen.show
           const updatedShow = prevValue.show.slice(0, -1).concat(newData);
           return {
             ...prevValue,
@@ -89,19 +102,21 @@ export default function Display() {
       screen.secondValue.length > 0
     ) {
       const result = calculate(screen.firstValue, screen.secondValue);
-      console.log("checking the result", result);
+
       setScreen((prevValue) => ({
         ...prevValue,
-        firstValue: [result],
+        firstValue: result > 0 ? [result] : [],
         operator: "",
         secondValue: [],
-        show: [result],
+        show: result > 0 ? [result] : [],
         getResult: result,
       }));
     } else if (
       checkDigit(operators, newData) &&
       screen.secondValue.length > 0
     ) {
+      debugger;
+
       const result = calculate(screen.firstValue, screen.secondValue);
       setScreen((prevValue) => ({
         ...prevValue,
