@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/calculator-app/static/css/main.9c93634d.css",
+    "main.js": "/calculator-app/static/js/main.af5c596b.js",
+    "static/js/787.97c71ab1.chunk.js": "/calculator-app/static/js/787.97c71ab1.chunk.js",
+    "index.html": "/calculator-app/index.html",
+    "main.9c93634d.css.map": "/calculator-app/static/css/main.9c93634d.css.map",
+    "main.af5c596b.js.map": "/calculator-app/static/js/main.af5c596b.js.map",
+    "787.97c71ab1.chunk.js.map": "/calculator-app/static/js/787.97c71ab1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9c93634d.css",
+    "static/js/main.af5c596b.js"
+  ]
+}
