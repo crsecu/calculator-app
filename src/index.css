@@ -74,6 +74,8 @@ button {
 
 .calculator {
   padding: 35px 25px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -92,17 +94,17 @@ button {
   justify-content: space-between;
 }
 
-.calculator__toggle-theme1{
+.calculator__toggle-theme1 {
   color: var(--btnWhiteText);
 }
-.calculator__toggle-theme2{
-  color: var(--t2-btnText)
+.calculator__toggle-theme2 {
+  color: var(--t2-btnText);
 }
-.calculator__toggle-theme3{
+.calculator__toggle-theme3 {
   color: var(--t3-btnText);
 }
 
-.calculator__toggle-theme-itle{
+.calculator__toggle-theme-itle {
   display: flex;
   align-items: center;
 }
@@ -160,7 +162,7 @@ button {
   .calculator__keypad-wrapper,
   .calculator__title-wrapper,
   .calculator__screen {
-     width: 35%;
+    width: 35%;
   }
 }
 
@@ -168,7 +170,7 @@ button {
   .calculator__keypad-wrapper,
   .calculator__title-wrapper,
   .calculator__screen {
-     width: 25%;
+    width: 25%;
   }
 }
 
@@ -338,7 +340,6 @@ button {
 .t3-btnShadow {
   border-bottom: 4px solid var(--t3-btnShadow);
 }
-
 
 /* Styling for toggle theme menu*/
 .calculator__toggle-theme {
